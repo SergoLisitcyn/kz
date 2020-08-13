@@ -19,6 +19,7 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
         var p=document.getElementById('term'); // p - абзац
         p.innerHTML=rng.value;
     }
+
 </script>
 
 <section class="content">
@@ -62,11 +63,11 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
                         </div>
                         <div class="form__registration-item form-group">
                             <label class="form__registration-label">ИИН</label>
-                            <input type="text" id="passport_id" class="form__registration-input" name="Register[passport_id]" autocomplete="off" required>
+                            <input type="text" id="tin" class="form__registration-input" name="Register[passport_id]" autocomplete="off" required>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Мобильный телефон</label>
-                            <input type="text" id="phone" class="form__registration-input " name="Register[mobile]" placeholder="+7 (___) ___-__-__" required>
+                            <input type="text" id="mobile" class="form__registration-input" name="Register[mobile]" placeholder="+7 (___) ___-__-__" required>
                             <span>Пожалуйста, укажите Ваш контактный телефон</span>
                         </div>
                         <div class="form__registration-item">
@@ -101,9 +102,9 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
 
             <p>Непредвиденные расходы застали врасплох? Не хватает денег на важную покупку, лечение или ремонт? В «Честном слове» вам выдадут микрокредит в режиме онлайн! Доступ к нашему сайту не ограничен территорией или временем суток, поэтому здесь вы получите нужную сумму, как только ощутите потребность в финансах.</p>
         </div>
-        <div class="readmore__body">
-            <?php echo $settings->content ?>
-        </div>
+
+        <?php echo $settings->content ?>
+
         <div class="main-text__readmore readmore">Подробнее</div>
     </div>
 </section>

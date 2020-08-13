@@ -165,3 +165,16 @@
     border-radius: 15px;
     border-color: #7dc587;
 }
+
+.readmore__body ul {
+    padding-left: 40px !important;
+    list-style-type: disc !important;
+}
+.readmore__body ol {
+    padding-left: 40px !important;
+    list-style-type: decimal !important;
+}
+
+.readmore__body li {
+    list-style-type: disc !important;
+}
