@@ -72,10 +72,10 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
                             <input type="text" class="form__registration-input " name="Register[residence]" autocomplete="off" placeholder="Введите название населенного пункта" required>
                         </div>
                         <div class="form__registration-item accept">
-                            <input type="checkbox" id="accept__privacy" required>
+                            <input type="checkbox" id="accept__privacy" name="accept__privacy" required>
                             <label for="accept__privacy">Я согласен с <a href="#" target="_blank">правилами</a> предоставления микрокредитов и других услуг и даю <a href="#" target="_blank">согласие</a>  на обработку моих персональных данных</label>
                         </div>
-                        <button type="submit" name="submit" class="form__registration-btn">Оставить заявку</button>
+                        <button type="submit" name="submit" onclick="if(this.form.accept__privacy.checked){alert('Для продолжения регистрации необходимо дать согласие на обработку персональных данных');return false}" class="form__registration-btn">Оставить заявку</button>
                     </div>
                 </div>
             </form>

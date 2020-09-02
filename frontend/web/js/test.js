@@ -1,5 +1,17 @@
 $(document).ready(function(){
     //terms and conditions need
+    // jQuery.validator.addMethod("lettersonly", function(value, element) {
+    //     return this.optional(element) || /^[a-z а-я]+$/i.test(value);
+    // }, "Letters only please");
+    jQuery.validator.addMethod("lettersonly", function( value, element ) {
+        var regex = new RegExp("[.,\/#!$%\^&\*;:{}=\-_`~()0-9]+$");
+        var key = value;
+
+        if (regex.test(key)) {
+            return false;
+        }
+        return true;
+    }, "Пожалуйста, используйте только буквенные символы");
     $('.form').validate({
         rules: {
             'Register[tin]': {
@@ -16,13 +28,16 @@ $(document).ready(function(){
                 email: true
             },
             'Register[surname]': {
-                required: true
+                required: true,
+                lettersonly: true
             },
             'Register[name]': {
                 required: true,
+                lettersonly: true
             },
             'Register[residence]': {
                 required: true,
+                lettersonly: true
             },
         },
         messages: {
@@ -48,4 +63,5 @@ $(document).ready(function(){
             },
         }
     });
+    // alert("Для продолжения регистрации необходимо дать согласие на обработку персональных данных");
 });
