@@ -12,16 +12,33 @@ $(document).ready(function(){
         }
         return true;
     }, "Пожалуйста, используйте только буквенные символы");
+    jQuery.validator.addMethod("inn", function( value, element ) {
+        var iin = value;
+        if (!iinCheck(iin)) {
+            return false;
+        }
+        return true;
+    }, "ИИН не правильный");
+    jQuery.validator.addMethod("mins", function( value, element ) {
+        var mins = value;
+        var i= mins.length-mins.replace(/\d/gm,'').length;
+        if ((i < 11)) {
+            return false;
+        }
+        return true;
+    }, "Пожалуйста, введите полностью номер");
     $('.form').validate({
         rules: {
             'Register[tin]': {
                 required: true,
                 minlength: 12,
                 maxlength: 12,
-                number: true
+                number: true,
+                inn: true
             },
             'Register[phone]': {
-                required: true
+                required: true,
+                mins: true,
             },
             'Register[email]': {
                 required: true,
@@ -63,5 +80,12 @@ $(document).ready(function(){
             },
         }
     });
-    // alert("Для продолжения регистрации необходимо дать согласие на обработку персональных данных");
+
+
+
+    $.each($('input#phone1'), function (index, val) {
+        $(this).focus(function () {
+            $(this).inputmask("+7 (799) 999-99-99");
+        });
+    });
 });

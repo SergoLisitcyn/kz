@@ -59,7 +59,7 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Мобильный телефон</label>
-                            <input type="text" id="phone" class="form__registration-input" name="Register[phone]" placeholder="+7 (___) ___-__-__" required>
+                            <input type="text" id="phone1" class="form__registration-input" name="Register[phone]" placeholder="+7 (7__) ___-__-__" required>
                             <span>Пожалуйста, укажите Ваш контактный телефон</span>
                         </div>
                         <div class="form__registration-item">

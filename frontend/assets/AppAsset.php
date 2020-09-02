@@ -19,6 +19,7 @@ class AppAsset extends AssetBundle
 //        'js/common.js',
         'js/test.js',
         'js/scripts.min.js',
+        'js/iincheck.min.js'
 
     ];
     public $depends = [
