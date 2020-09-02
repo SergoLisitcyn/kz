@@ -13,11 +13,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/main.min.css',
-        'css/index.css',
+        'css/index.css?v=3',
     ];
     public $js = [
 //        'js/common.js',
-//        'js/test.js?v=3',
+        'js/test.js',
         'js/scripts.min.js',
 
     ];

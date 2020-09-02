@@ -30,7 +30,7 @@ AppAsset::register($this);
     <header class="header">
         <div class="header__top"></div>
         <div class="header__logo">
-            <a href="index.html">
+            <a href="/">
                 <img src="../img/logo.png" alt="Logo">
             </a>
         </div>

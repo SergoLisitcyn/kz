@@ -19,24 +19,16 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
         var p=document.getElementById('term'); // p - абзац
         p.innerHTML=rng.value;
     }
-
 </script>
 
 <section class="content">
     <div class="container">
-        <?php if (Yii::$app->session->hasFlash('error')): ?>
-            <div class="alert-kz">
-                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                <?php echo $settings->text_fail ?>
-                <?= Yii::$app->session->getFlash('error') ?>
-            </div>
-        <?php endif; ?>
         <div class="form__wrap">
             <form class="form" id="register" action="/" method="post">
                 <h2 class="form__title">Оформить заявку на микрокредит</h2>
                 <div class="form__item">
                     <div class="form__item-title amount">Я хочу получить <span id="amount"><?php echo $settings->amount ?></span>  тенге</div>
-                    <input type="range"  class="form__slider"  name="Register[amount]" id="slider1" min="<?php echo $settings->min_amount ?>" max="<?php echo $settings->amount ?>" step="500" value="42000"  oninput="fun1()">
+                    <input type="range"  class="form__slider"  name="Register[amount]" id="slider1" min="<?php echo $settings->min_amount ?>" max="<?php echo $settings->amount ?>" step="500" value="<?php echo $settings->amount ?>"  oninput="fun1()">
                     <!--                    <div id="slider1" class="form__slider"></div>-->
                 </div>
                 <div class="form__item">
@@ -51,33 +43,33 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
                     <div class="form__registration-row">
                         <div class="form__registration-item">
                             <label class="form__registration-label">Фамилия</label>
-                            <input type="text" id="register-surname" name="Register[surname]" placeholder="Иванов" class="form__registration-input " autocomplete="off" value="">
+                            <input type="text" name="Register[surname]" placeholder="Иванов" class="form__registration-input " autocomplete="off" value="" required>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Имя</label>
-                            <input type="text" id="register-name" placeholder="Иван" name="Register[name]" class="form__registration-input " autocomplete="off" value="">
+                            <input type="text" placeholder="Иван" name="Register[name]" class="form__registration-input " autocomplete="off" value="" required>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Отчество</label>
-                            <input type="text" id="register-patronymic" placeholder="Иванович" name="Register[patronymic]" class="form__registration-input " autocomplete="off" value="">
+                            <input type="text" placeholder="Иванович" name="Register[patronymic]" class="form__registration-input " autocomplete="off" value="">
                         </div>
                         <div class="form__registration-item form-group">
                             <label class="form__registration-label">ИИН</label>
-                            <input type="text" id="tin" class="form__registration-input" name="Register[passport_id]" autocomplete="off" required>
+                            <input type="text" id="tin" class="form__registration-input" name="Register[tin]" autocomplete="off" required>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Мобильный телефон</label>
-                            <input type="text" id="mobile" class="form__registration-input" name="Register[mobile]" placeholder="+7 (___) ___-__-__" required>
+                            <input type="text" id="phone" class="form__registration-input" name="Register[phone]" placeholder="+7 (___) ___-__-__" required>
                             <span>Пожалуйста, укажите Ваш контактный телефон</span>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Email</label>
-                            <input type="text" id="register-email" class="form__registration-input " name="Register[email]" autocomplete="off" required>
+                            <input type="text" class="form__registration-input " name="Register[email]" autocomplete="off" required>
                             <span>Пожалуйста, укажите Ваш email</span>
                         </div>
                         <div class="form__registration-item">
                             <label class="form__registration-label">Место проживания</label>
-                            <input type="text" id="register-residence" class="form__registration-input " name="Register[residence]" autocomplete="off" placeholder="Введите название населенного пункта">
+                            <input type="text" class="form__registration-input " name="Register[residence]" autocomplete="off" placeholder="Введите название населенного пункта" required>
                         </div>
                         <div class="form__registration-item accept">
                             <input type="checkbox" id="accept__privacy" required>

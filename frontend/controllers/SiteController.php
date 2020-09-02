@@ -81,12 +81,12 @@ class SiteController extends Controller
         $model = new Register();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            $date = substr($model['passport_id'], 0,6);
+            $date = substr($model['tin'], 0,6);
             $dateTime = \DateTime::createFromFormat('ymd', $date);
             $newDate = $dateTime->format('Y-m-d');
             $model->birthdate = $newDate;
 
-            $sex = $model['passport_id']{6};
+            $sex = $model['tin']{6};
             if($sex == 1 || $sex == 3 || $sex == 5){
                 $model->sex = '1';
             } else {
@@ -100,8 +100,8 @@ class SiteController extends Controller
                         "name" => $model['name'],
                         "patronymic" => $model['patronymic'],
                         "sex" => $model['sex'],
-                        "mobile" => $model['mobile'],
-                        "passport_id" => $model['passport_id'],
+                        "mobile" => $model['phone'],
+                        "passport_id" => $model['tin'],
                         "email" => $model['email'],
                         "birthdate" => $model['birthdate'],
                         "residence" => $model['residence'],
@@ -139,12 +139,12 @@ class SiteController extends Controller
                 if(isset($response['link'])){
                     return $this->redirect($response['link']);
                 } else {
-                    Yii::$app->session->setFlash(
-                        'error',
-                        ''
-                    );
+                    return $this->redirect('credit');
+//                    Yii::$app->session->setFlash(
+//                        'error',
+//                        ''
+//                    );
                 }
-
                 return $this->refresh();
             } else {
                 Yii::$app->session->setFlash(
@@ -181,6 +181,15 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionCredit()
+    {
+        $settings = Settings::find()->where(['status' => 'on'])->one();
+
+        return $this->render('credit', [
+            'settings' => $settings
+        ]);
     }
 
     /**

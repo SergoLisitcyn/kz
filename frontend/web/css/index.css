@@ -178,3 +178,23 @@
 .readmore__body li {
     list-style-type: disc !important;
 }
+
+.form__otkaz-btn:hover{
+    text-decoration: none !important;
+    color: #fff !important;
+    opacity: 0.9;
+}
+
+.form__otkaz-btn {
+    width: 100%;
+    font-size: 21px;
+    display: block;
+    background: #7dc587;
+    color: #fff;
+    margin-top: 40px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    border: 0;
+    cursor: pointer;
+}
