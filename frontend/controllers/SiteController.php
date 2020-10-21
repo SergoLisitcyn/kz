@@ -81,9 +81,7 @@ class SiteController extends Controller
         $model = new Register();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-
             $year = substr($model['tin'], 0,2);
-
             $month = substr($model['tin'], 2,2);
             $day = substr($model['tin'], 4,2);
 
@@ -96,10 +94,11 @@ class SiteController extends Controller
 
             if($sex == 3 || $sex == 4){
                 $newDate = '19'.$year.'-'.$month.'-'.$day;
-            } else {
+            } elseif($sex == 5 || $sex == 6) {
                 $newDate = '20'.$year.'-'.$month.'-'.$day;
+            } else {
+                $newDate = '18'.$year.'-'.$month.'-'.$day;
             }
-
 
             $model->birthdate = $newDate;
 
