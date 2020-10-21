@@ -81,10 +81,11 @@ class SiteController extends Controller
         $model = new Register();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            $date = substr($model['tin'], 0,6);
-            $dateTime = \DateTime::createFromFormat('ymd', $date);
-            $newDate = $dateTime->format('Y-m-d');
-            $model->birthdate = $newDate;
+
+            $year = substr($model['tin'], 0,2);
+
+            $month = substr($model['tin'], 2,2);
+            $day = substr($model['tin'], 4,2);
 
             $sex = $model['tin']{6};
             if($sex == 1 || $sex == 3 || $sex == 5){
@@ -92,6 +93,15 @@ class SiteController extends Controller
             } else {
                 $model->sex = '2';
             }
+
+            if($sex == 3 || $sex == 4){
+                $newDate = '19'.$year.'-'.$month.'-'.$day;
+            } else {
+                $newDate = '20'.$year.'-'.$month.'-'.$day;
+            }
+
+
+            $model->birthdate = $newDate;
 
 //            $model->save();
             if ($model->save()) {
@@ -115,7 +125,8 @@ class SiteController extends Controller
                 $data = [
                     "partner" => 5,
                     "data" => $dataSig,
-                    "signature" => $signature
+                    "signature" => $signature,
+                    "method" => 'check',
                 ];
 
 
@@ -135,17 +146,45 @@ class SiteController extends Controller
                 $context  = stream_context_create( $options );
                 $result = file_get_contents( 'https://mfo-crm.4slovo.kz/requestAPI.php', false, $context );
                 $response = json_decode( $result, true );
+                if($response['response'] == 'OK'){
+                    $dataLink = [
+                        "partner" => 5,
+                        "data" => $dataSig,
+                        "signature" => $signature,
+                    ];
 
-                if(isset($response['link'])){
-                    return $this->redirect($response['link']);
+
+                    $options = array(
+                        'http' => array(
+                            'method'  => 'POST',
+                            'content' => json_encode( $dataLink ),
+                            'header'=>  "Content-Type: application/json\r\n" .
+                                "Accept: application/json\r\n"
+                        ),
+                        "ssl"=>array(
+                            "verify_peer"=>false,
+                            "verify_peer_name"=>false,
+                        ),
+                    );
+
+                    $context  = stream_context_create( $options );
+                    $result = file_get_contents( 'https://mfo-crm.4slovo.kz/requestAPI.php', false, $context );
+                    $response = json_decode( $result, true );
+
+                    if($response['error'] == 'Повторный запрос'){
+                        return $this->redirect('notification');
+                    }
+
+                    if(isset($response['link'])){
+                        return $this->redirect($response['link']);
+                    } else {
+                        return $this->redirect('credit');
+                    }
                 } else {
                     return $this->redirect('credit');
-//                    Yii::$app->session->setFlash(
-//                        'error',
-//                        ''
-//                    );
                 }
-                return $this->refresh();
+
+//                return $this->refresh();
             } else {
                 Yii::$app->session->setFlash(
                     'error',
@@ -188,6 +227,15 @@ class SiteController extends Controller
         $settings = Settings::find()->where(['status' => 'on'])->one();
 
         return $this->render('credit', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function actionNotification()
+    {
+        $settings = Settings::find()->where(['status' => 'on'])->one();
+
+        return $this->render('notification', [
             'settings' => $settings
         ]);
     }

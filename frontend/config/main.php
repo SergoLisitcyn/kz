@@ -42,7 +42,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'credit' => 'site/credit'
+                'credit' => 'site/credit',
+                'notification' => 'site/notification'
             ],
         ],
 
