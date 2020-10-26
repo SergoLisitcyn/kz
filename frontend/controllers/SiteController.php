@@ -78,6 +78,15 @@ class SiteController extends Controller
     {
         $settings = Settings::find()->where(['status' => 'on'])->one();
 
+        return $this->render('index', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function actionSuccess()
+    {
+        $settings = Settings::find()->where(['status' => 'on'])->one();
+
         $model = new Register();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -105,17 +114,17 @@ class SiteController extends Controller
 //            $model->save();
             if ($model->save()) {
                 $dataSig = [
-                        "surname" => $model['surname'],
-                        "name" => $model['name'],
-                        "patronymic" => $model['patronymic'],
-                        "sex" => $model['sex'],
-                        "mobile" => $model['phone'],
-                        "passport_id" => $model['tin'],
-                        "email" => $model['email'],
-                        "birthdate" => $model['birthdate'],
-                        "residence" => $model['residence'],
-                        "amount" => $model['amount'],
-                        "term" => $model['term'],
+                    "surname" => $model['surname'],
+                    "name" => $model['name'],
+                    "patronymic" => $model['patronymic'],
+                    "sex" => $model['sex'],
+                    "mobile" => $model['phone'],
+                    "passport_id" => $model['tin'],
+                    "email" => $model['email'],
+                    "birthdate" => $model['birthdate'],
+                    "residence" => $model['residence'],
+                    "amount" => $model['amount'],
+                    "term" => $model['term'],
                 ];
                 $password = '548qngou02IGGGFwq}!nPbRv9Vt97Tabc';
 
@@ -170,20 +179,24 @@ class SiteController extends Controller
                     $result = file_get_contents( 'https://mfo-crm.4slovo.kz/requestAPI.php', false, $context );
                     $response = json_decode( $result, true );
 
-                    if($response['error'] == 'Повторный запрос'){
-                        return $this->redirect('notification');
+                    if(isset($response['error'])){
+                        if($response['error'] == 'Повторный запрос'){
+                            return $this->redirect('notification');
+                        }
                     }
 
                     if(isset($response['link'])){
-                        return $this->redirect($response['link']);
+                        return $this->render('success', [
+                            'model' => $model,
+                            'settings' => $settings,
+                            'link' => $response['link'],
+                        ]);
                     } else {
                         return $this->redirect('credit');
                     }
                 } else {
                     return $this->redirect('credit');
                 }
-
-//                return $this->refresh();
             } else {
                 Yii::$app->session->setFlash(
                     'error',
@@ -191,11 +204,6 @@ class SiteController extends Controller
                 );
             }
         }
-        return $this->render('index', [
-            'model' => $model,
-            'settings' => $settings
-        ]);
-
     }
 
     /**

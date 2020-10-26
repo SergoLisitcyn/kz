@@ -24,7 +24,7 @@ if(isset($settings->description) and !empty($settings->description)) { $this->re
 <section class="content">
     <div class="container">
         <div class="form__wrap">
-            <form class="form" id="register" action="/" method="post">
+            <form class="form" id="register" action="success" method="post">
                 <h2 class="form__title">Оформить заявку на микрокредит</h2>
                 <div class="form__item">
                     <div class="form__item-title amount">Я хочу получить <span id="amount"><?php echo $settings->amount ?></span>  тенге</div>

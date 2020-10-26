@@ -26,6 +26,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'min_term')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'text_succes')->widget(\mihaildev\ckeditor\CKEditor::className(),[
+        'editorOptions' => [
+            'preset' => 'full',
+            'inline' => false,
+        ],
+    ]); ?>
+
     <?= $form->field($model, 'text_fail')->widget(\mihaildev\ckeditor\CKEditor::className(),[
         'editorOptions' => [
             'preset' => 'full',

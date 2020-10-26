@@ -43,6 +43,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'credit' => 'site/credit',
+                'success' => 'site/success',
                 'notification' => 'site/notification'
             ],
         ],
