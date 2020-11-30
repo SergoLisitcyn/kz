@@ -186,11 +186,17 @@ class SiteController extends Controller
                     }
 
                     if(isset($response['link'])){
-                        return $this->render('success', [
-                            'model' => $model,
-                            'settings' => $settings,
-                            'link' => $response['link'],
-                        ]);
+                        if($response['response'] == 'new person added'){
+                            return $this->redirect($response['link']);
+                        } elseif ($response['response'] == 'moved to broker'){
+                            return $this->render('success', [
+                                'model' => $model,
+                                'settings' => $settings,
+                                'link' => $response['link'],
+                            ]);
+                        } else {
+                            return $this->redirect('credit');
+                        }
                     } else {
                         return $this->redirect('credit');
                     }

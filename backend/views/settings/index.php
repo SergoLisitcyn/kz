@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'keywords',
             //'description',
             'status',
+            'link',
             //'analytics',
 
             ['class' => 'yii\grid\ActionColumn'],

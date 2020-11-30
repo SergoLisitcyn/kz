@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'term',
             'keywords',
             'description',
+            'link',
             'status',
-            'analytics',
         ],
     ]) ?>
 

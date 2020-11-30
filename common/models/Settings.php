@@ -21,6 +21,7 @@ use Yii;
  * @property string|null $min_term
  * @property string|null $text_succes
  * @property string|null $text_fail
+ * @property string|null $link
  */
 class Settings extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,7 @@ class Settings extends \yii\db\ActiveRecord
             [['content', 'amount','min_amount', 'term','min_term', 'status'], 'required'],
             [['status'], 'string'],
             [['content', 'analytics'], 'string', 'max' => 20000],
-            [['amount', 'term','name','title','min_term'], 'string', 'max' => 255],
+            [['amount', 'term','name','title','min_term','link'], 'string', 'max' => 255],
             [['keywords', 'description'], 'string', 'max' => 1000],
             [['text_fail'], 'string', 'max' => 1000],
             [['text_succes'], 'string', 'max' => 2000],
@@ -68,6 +69,7 @@ class Settings extends \yii\db\ActiveRecord
             'min_term' => 'Минимальное значение срока',
             'text_succes' => 'Текст успешной заявки',
             'text_fail' => 'Текст отказной заявки',
+            'link' => 'Ссылка на отказной оффер',
         ];
     }
 }
